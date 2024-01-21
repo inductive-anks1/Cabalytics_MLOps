@@ -117,6 +117,26 @@ def test_feature_build(df):
     convert_time_columns_to_int(df)
     print(df.head())
 
+def feature_build(df, tag):
+    filter_dataframe(df)
+    map_cab_type(df)
+    clean_cab_price(df)
+    split_arrival_time(df)
+    split_current_time(df)
+    apply_availability_mapping(df)
+    clean_cab_destination_time(df)
+    format_current_time(df)
+    update_destination_time_for_unavailability(df)
+    calculate_route_time(df)
+    split_current_time_into_hour_minute(df)
+    split_current_date(df)
+    convert_time_columns_to_int(df)
+    
+    feature_names = [f for f in df.columns]
+    print(f'We have {len(feature_names)} features in {tag}.')
+    return df[feature_names]
+
+
 
 if __name__ == "__main__":
     curr_dir = pathlib.Path(__file__)
