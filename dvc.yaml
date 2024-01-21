@@ -1,0 +1,20 @@
+stages:
+  build_features:
+    cmd: python /src/features/build_features.py /data/raw/Cab_Data.csv /data/processed/build_features/Cab_Data.csv
+    deps:
+    - /data/raw/Cab_Data.csv
+    - /src/features/build_features.py
+    - /src/features/features_definitions.py
+    outs:
+    - /data/processed/build_features/Cab_Data.csv
+
+  make_dataset:
+    cmd: python /src/data/make_dataset.py /data/processed/build_features/Cab_Data.csv /data/processed/make_dataset/
+    deps:
+    - /data/processed/build_features/Cab_Data.csv
+    - /src/data/make_dataset.py
+    params:
+    - make_dataset.test_split
+    - make_dataset.seed
+    outs:
+    - /data/processed/make_dataset/
