@@ -51,8 +51,23 @@ def train_model(X_train, y_train, n_estimators, max_depth, max_samples, max_feat
     return pipe
 
 def save_model(model, output_path):
+    # Ensure the output path ends with '/'
+    if not output_path.endswith('/'):
+        output_path += '/'
+    
     # Save the trained model to the specified output path
-    pickle.dump(model, output_path + '/model.joblib')
+    with open(output_path + 'model.pkl', 'wb') as file:
+        pickle.dump(model, file)
+
+def drop_nan_values(X, y):
+    # Check for NaN values in the target variable
+    nan_mask = y.isna()
+    if nan_mask.sum() > 0:
+        print(f"Dropping {nan_mask.sum()} rows with NaN values in target variable")
+        X = X[~nan_mask]
+        y = y[~nan_mask]
+    return X, y
+
 
 def main():
     params_file = 'params.yaml'
@@ -72,8 +87,12 @@ def main():
     X_train = train_features.drop('Cab_Price', axis=1)
     y_train = train_features['Cab_Price']
 
+    # Handle NaN values
+    X_train, y_train = drop_nan_values(X_train, y_train)
+
     trained_model = train_model(X_train, y_train, params['n_estimators'], params['max_depth'], 
                                 params['max_samples'], params['max_features'], params['seed'])
+    
     save_model(trained_model, output_path)
 
 if __name__ == "__main__":
