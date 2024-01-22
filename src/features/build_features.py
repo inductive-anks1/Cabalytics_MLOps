@@ -26,5 +26,5 @@ if __name__ == "__main__":
     output_path = home_dir.as_posix() + '/data/processed'
 
     data = feature_build(data, 'Cab_Data')
-    
+
     save_data(data, output_path)
