@@ -1,3 +1,6 @@
-make_dataset:
-  test_split: 0.2
+train_model:
+  n_estimators: 50
+  max_depth: 8
+  max_sample: 3
+  max_features: 6
   seed: 23
