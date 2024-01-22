@@ -6,9 +6,10 @@ from sklearn.model_selection import train_test_split
 from features_definitions import feature_build
 
 def load_data(data_path):
-    # Load your dataset from a given path
-    df = pd.read_csv(data_path)
+    # Load your dataset from a given path, skipping the first column if it's an index
+    df = pd.read_csv(data_path, index_col=0)
     return df
+
 
 def save_data(train, test, output_path):
     pathlib.Path(output_path).mkdir(parents=True, exist_ok=True)

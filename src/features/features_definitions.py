@@ -100,6 +100,13 @@ def convert_time_columns_to_int(df):
     df['Current_Year'] = df['Current_Year'].astype('int')
     return df
 
+def drop_specific_columns(df):
+    columns_to_drop = ['Cab_Destination_Time', 'Cab_Arrival_Time', 'Current_Time', 
+                       'Current_Date', 'Availability', 'Route_Time']
+    df.drop(columns=columns_to_drop, inplace=True)
+    return df
+
+
 
 def test_feature_build(df):
     filter_dataframe(df)
@@ -115,6 +122,7 @@ def test_feature_build(df):
     split_current_time_into_hour_minute(df)
     split_current_date(df)
     convert_time_columns_to_int(df)
+    drop_specific_columns(df)
     print(df.head())
 
 def feature_build(df, tag):
@@ -131,6 +139,7 @@ def feature_build(df, tag):
     split_current_time_into_hour_minute(df)
     split_current_date(df)
     convert_time_columns_to_int(df)
+    drop_specific_columns(df)
     
     feature_names = [f for f in df.columns]
     print(f'We have {len(feature_names)} features in {tag}.')

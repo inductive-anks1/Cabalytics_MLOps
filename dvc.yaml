@@ -1,8 +1,13 @@
 stages:
+  build_features:
+    cmd: python3 src/features/build_features.py
+    deps:
+      - data/raw/
+      - src/features/build_features.py
   train_model:
     cmd: python3 src/models/train_model.py data/processed/
     deps:
     - data/processed/
     - src/models/train_model.py
     outs:
-    - models
+    - models/
