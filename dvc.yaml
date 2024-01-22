@@ -5,4 +5,4 @@ stages:
     - data/processed/
     - src/models/train_model.py
     outs:
-    - models/
+    - models

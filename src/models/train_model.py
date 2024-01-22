@@ -5,6 +5,7 @@ import joblib
 import mlflow
 import pickle
 import yaml
+import os
 
 
 import pandas as pd
@@ -54,17 +55,20 @@ def save_model(model, output_path):
     pickle.dump(model, output_path + '/model.joblib')
 
 def main():
-    curr_dir = pathlib.Path(__file__)
-    home_dir = curr_dir.parent.parent.parent
-    params_file = home_dir.as_posix() + '/params.yaml'
+    params_file = 'params.yaml'
     params = yaml.safe_load(open(params_file))["train_model"]
 
+    # The input file path is provided as a command line argument
+    # which should be "data/processed" based on the dvc.yaml cmd
     input_file = sys.argv[1]
-    data_path = home_dir.as_posix() + input_file
-    output_path = home_dir.as_posix() + '/models'
+    data_path = input_file  # This is already a relative path from the project root
+    output_path = 'models'
     pathlib.Path(output_path).mkdir(parents=True, exist_ok=True)
     
-    train_features = pd.read_csv(data_path + '/Cab_Data_Train.csv')
+    # Join the data_path with the actual CSV filename
+    train_features_path = os.path.join(data_path, 'Cab_Data_Train.csv')
+    train_features = pd.read_csv(train_features_path)
+    
     X_train = train_features.drop('Cab_Price', axis=1)
     y_train = train_features['Cab_Price']
 
