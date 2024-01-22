@@ -10,21 +10,25 @@ def load_data(data_path):
     df = pd.read_csv(data_path)
     return df
 
-def save_data(data, output_path):
+def save_data(train, test, output_path):
     pathlib.Path(output_path).mkdir(parents=True, exist_ok=True)
-    data.to_csv(output_path + '/Cab_Data.csv', index=False)
+    train.to_csv(output_path + '/Cab_Data_Train.csv', index=False)
+    test.to_csv(output_path + '/Cab_Data_Test.csv', index=False)
 
 
 if __name__ == "__main__":
     curr_dir = pathlib.Path(__file__)
     home_dir = curr_dir.parent.parent.parent
 
-    data_path = home_dir.as_posix() + '/data/raw/Cab_Data.csv'
-
-    data = pd.read_csv(data_path)
+    train_path = home_dir.as_posix() + '/data/raw/Cab_Data_Train.csv'
+    test_path = home_dir.as_posix() + '/data/raw/Cab_Data_Test.csv'
+    
+    train_data = pd.read_csv(train_path)
+    test_data = pd.read_csv(test_path)
 
     output_path = home_dir.as_posix() + '/data/processed'
 
-    data = feature_build(data, 'Cab_Data')
+    train_data = feature_build(train_data, 'train')
+    test_data = feature_build(test_data, 'test')
 
-    save_data(data, output_path)
+    save_data(train_data, test_data, output_path)
