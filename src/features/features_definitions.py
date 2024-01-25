@@ -148,8 +148,6 @@ def feature_build(df, tag):
 
 
 if __name__ == "__main__":
-    curr_dir = pathlib.Path(__file__)
-    home_dir = curr_dir.parent.parent.parent
-    data_path = home_dir.as_posix() + '/data/raw/Cab_Data_Train.csv'
+    data_path = 'data/raw/Cab_Data_Train.csv'  # Path is relative to the root of the repository
     data = pd.read_csv(data_path, nrows=10)
     test_feature_build(data)
