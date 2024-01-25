@@ -17,9 +17,9 @@ stages:
     deps:
     - path: data/processed/
       hash: md5
-      md5: 6ffbaaad7b4ac6e1afabed19a80b2560.dir
-      size: 0
-      nfiles: 1
+      md5: f20be619b294ad52526f300b28e9276d.dir
+      size: 818208
+      nfiles: 3
     - path: src/models/train_model.py
       hash: md5
       md5: 9d259e26faca8c51db29767400cc45f6
@@ -27,6 +27,6 @@ stages:
     outs:
     - path: models/
       hash: md5
-      md5: 791a460465efdf435175e8af3f380df9.dir
-      size: 33480
+      md5: 876781273378e85c44a19ca30796a97a.dir
+      size: 33317
       nfiles: 1
