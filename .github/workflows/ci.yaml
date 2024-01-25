@@ -22,4 +22,4 @@ jobs:
 
     - name: Run Tests
       run: |
-        python src/features/features_definitions.py
+        python ./src/features/features_definitions.py
