@@ -149,6 +149,6 @@ def feature_build(df, tag):
 from pathlib import Path
 
 if __name__ == "__main__":
-    data_path = Path('data/raw/Cab_Data_Train.csv')  # Pathlib will handle the correct file path format
+    data_path = Path('.\data\raw\Cab_Data_Train.csv')  # Pathlib will handle the correct file path format
     data = pd.read_csv(data_path, nrows=10)
     test_feature_build(data)
